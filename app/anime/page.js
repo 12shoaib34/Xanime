@@ -13,7 +13,7 @@ const Anime = async (props) => {
 
   return (
     <div className="x-container py-12 flex flex-col gap-4">
-      <div className="w-full overflow-hidden bg-background-secondary rounded-md h-[650px]">
+      <div className="w-full overflow-hidden bg-background-secondary rounded-md md:h-[650px]">
         <StreamingContainer anime={anime} episode={episode} cat={cat} />
       </div>
       <AnimeEpList selectedEpisode={episode} data={anime} />
