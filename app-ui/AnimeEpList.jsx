@@ -59,8 +59,8 @@ const AnimeEpList = ({ data, selectedEpisode }) => {
             <div key={ep} className="w">
               <button
                 onClick={() => handleEpisodeClick(ep)}
-                className={`w-full h-10 text-xs md:text-base rounded-md hover:bg-background-secondary ${
-                  selectedEpisode === ep ? "bg-primary text-black" : "bg-background-tertiary text-gray-400"
+                className={`w-full h-10 text-xs md:text-base rounded-md  ${
+                  selectedEpisode === ep ? "bg-primary text-black" : "bg-background-secondary text-gray-400"
                 } ${data?.filers?.includes(ep) ? "line-through opacity-20" : ""}`}
               >
                 {ep}

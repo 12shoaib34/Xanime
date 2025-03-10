@@ -1,19 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&display=swap");
 @import "tailwindcss";
 
 :root {
   /* background */
-  --background: #181c14;
-  --background-secondary: #212121;
+  --background: #0b0c2a;
+  --background-secondary: #070720;
   --background-tertiary: #2d2d2d;
 
   /* foreground */
-  --foreground: #aeaeae;
+  --foreground: #ffffff;
   --foreground-secondary: #1c1c1c;
   --foreground-tertiary: #2d2d2d;
 
   --border: #424242;
-  --primary: #d59f3a;
+  --primary: #e53637;
 }
 
 @theme inline {
@@ -36,7 +36,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Mulish", sans-serif;
 }
 
 button {
@@ -47,8 +47,12 @@ button {
   border-color: var(--border);
 }
 
+.font-oswald {
+  font-family: "Oswald", sans-serif;
+}
+
 .x-container {
-  max-width: 1200px;
+  max-width: 1170px;
   margin: 0 auto;
   padding-left: 10px;
   padding-right: 10px;
@@ -78,6 +82,14 @@ button {
 
 /* buttons */
 
-.btn-primary {
-  @apply text-primary border-primary bg-background-secondary font-semibold rounded-lg capitalize px-6 py-1;
+.btn {
+  @apply cursor-pointer block font-semibold uppercase w-max;
+}
+
+.btn.btn-primary {
+  @apply bg-primary text-white hover:opacity-75 active:opacity-100;
+}
+
+.btn.btn-md {
+  @apply px-4 py-2 md:px-6 md:py-4 text-base;
 }

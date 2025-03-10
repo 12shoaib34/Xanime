@@ -130,7 +130,7 @@ const Controls = (props) => {
             <MdSettings size={22} />
           </XButton>
           <div
-            className={`min-w-[300px] min-h-[300px] absolute -translate-y-full -translate-x-full top-0 left-10 p-2 bg-background-tertiary rounded-2xl ${
+            className={`min-w-[300px] min-h-[300px] absolute -translate-y-full -translate-x-full top-0 left-10 p-2 bg-background-secondary rounded-2xl ${
               isOpen ? "block" : "hidden"
             }`}
           >
@@ -150,8 +150,8 @@ const Controls = (props) => {
                 {captions.map((caption, index) => (
                   <button
                     onClick={() => onCaptionChange(caption)}
-                    className={`cursor-pointer text-left hover:bg-background-secondary py-2 px-4 rounded-2xl ${
-                      settings.caption.label === caption.label ? "bg-background-secondary" : ""
+                    className={`cursor-pointer text-left hover:bg-slate-800 py-2 px-4 rounded-2xl ${
+                      settings.caption.label === caption.label ? "bg-slate-800" : ""
                     }`}
                     key={index}
                   >
@@ -166,8 +166,8 @@ const Controls = (props) => {
                 {qualityLevels.map((quality, index) => (
                   <button
                     onClick={() => onQualityUpdate(quality)}
-                    className={`cursor-pointer text-left hover:bg-background-secondary py-2 px-4 rounded-2xl ${
-                      settings.selectedQuality === quality.index ? "bg-background-secondary" : ""
+                    className={`cursor-pointer text-left hover:bg-slate-800 py-2 px-4 rounded-2xl ${
+                      settings.selectedQuality === quality.index ? "bg-slate-800" : ""
                     }`}
                     key={index}
                   >
@@ -182,8 +182,8 @@ const Controls = (props) => {
                 {[0.5, 1, 1.5, 2].map((speed, index) => (
                   <button
                     onClick={() => onPlayBackRateChange(speed)}
-                    className={`cursor-pointer text-left hover:bg-background-secondary py-2 px-4 rounded-2xl ${
-                      settings.playbackRate === speed ? "bg-background-secondary" : ""
+                    className={`cursor-pointer text-left hover:bg-slate-800 py-2 px-4 rounded-2xl ${
+                      settings.playbackRate === speed ? "bg-slate-800" : ""
                     }`}
                     key={index}
                   >
