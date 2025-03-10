@@ -12,10 +12,9 @@ const Anime = async (props) => {
   const anime = animeList.find((anime) => anime._id === animeId);
 
   return (
-    <div className="x-container py-12 flex flex-col gap-4">
-      <div className="flex flex-col-reverse md:flex-row gap-4">
+    <div className="x-container py-12 flex flex-col  gap-4">
+      <div className="flex flex-col-reverse md:flex-row md:items-start gap-4">
         <AnimeEpList selectedEpisode={episode} data={anime} />
-
         <StreamingContainer anime={anime} episode={episode} cat={cat} />
       </div>
     </div>
