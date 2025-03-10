@@ -25,10 +25,10 @@ const VideoAreaActions = (props) => {
 
     if (!document.fullscreenElement) {
       XPlayer.requestFullscreen();
-      setSettings((prev) => ({ ...prev, isFullscreen: true }));
+      setSettings((prev) => ({ ...prev, fullscreen: true }));
     } else {
       document.exitFullscreen();
-      setSettings((prev) => ({ ...prev, isFullscreen: false }));
+      setSettings((prev) => ({ ...prev, fullscreen: false }));
     }
   };
 

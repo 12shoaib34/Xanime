@@ -51,7 +51,7 @@ const Navbar = () => {
               <div className="flex space-x-4">
                 <Link
                   href="/"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white bg-primary"
+                  className="rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-gray-700 hover:text-white bg-primary"
                 >
                   Home
                 </Link>

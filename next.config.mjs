@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["media.kitsu.app"],
+    domains: ["www11.gogoanime.me"],
   },
 };
 

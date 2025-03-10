@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import ReactPlayer from "react-player";
+import { useEffect, useState } from "react";
 
 const CustomSubtitles = ({ subtitleUrl, playerRef }) => {
   const [subtitles, setSubtitles] = useState([]);
@@ -14,6 +13,7 @@ const CustomSubtitles = ({ subtitleUrl, playerRef }) => {
         const text = await response.text();
 
         const parsedSubtitles = parseVTT(text);
+
         setSubtitles(parsedSubtitles);
       } catch (error) {
         console.error("Failed to load subtitles", error);
@@ -29,6 +29,8 @@ const CustomSubtitles = ({ subtitleUrl, playerRef }) => {
     if (!video) return;
 
     const updateSubtitle = () => {
+      if (!subtitles || subtitles.length === 0) return;
+
       const currentTime = video.currentTime;
       const activeSubtitle = subtitles.find((sub) => currentTime >= sub.start && currentTime <= sub.end);
       setCurrentSubtitle(activeSubtitle ? activeSubtitle.text : "");
@@ -40,33 +42,60 @@ const CustomSubtitles = ({ subtitleUrl, playerRef }) => {
 
   return currentSubtitle ? (
     <div
-      className="absolute w-full max-w-xl text-center rounded-2xl bottom-22 left-1/2 -translate-x-1/2 bg-black/70 px-4 py-2 text-white text-xl"
+      className="absolute w-max max-w-xl text-center bottom-16 md:bottom-22 left-1/2 -translate-x-1/2 bg-black/70 p-1 md:px-4 md:py-2 text-white text-xs md:text-xl"
       dangerouslySetInnerHTML={{ __html: currentSubtitle }}
     ></div>
   ) : null;
 };
 
 // Helper function to parse .vtt files
+// Helper function to parse .vtt files
 const parseVTT = (vttText) => {
-  const regex = /(\d{2}:\d{2}:\d{2}.\d{3}) --> (\d{2}:\d{2}:\d{2}.\d{3})\s+([\s\S]+?)(?=\n\n|\n$)/g;
-  let matches,
-    results = [];
+  const lines = vttText.split(/\r?\n/); // Split by new lines
+  const captions = [];
+  let tempCaption = {};
 
-  while ((matches = regex.exec(vttText)) !== null) {
-    const [_, start, end, text] = matches;
-    results.push({
-      start: timeToSeconds(start),
-      end: timeToSeconds(end),
-      text: text.replace(/\n/g, " "),
-    });
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+
+    if (!line) continue; // Skip empty lines
+
+    // Match timestamps (e.g., "00:00:01.000 --> 00:00:04.000")
+    if (line.includes("-->")) {
+      const [start, end] = line.split(" --> ");
+      tempCaption = {
+        start: timeToSeconds(start),
+        end: timeToSeconds(end),
+        text: "",
+      };
+    } else if (tempCaption.text !== undefined) {
+      // Subtitle text (can be multiple lines)
+      tempCaption.text += line + "<br/>";
+    }
+
+    // Push when we reach a blank line or end of file
+    if (lines[i + 1] === "" || i === lines.length - 1) {
+      if (tempCaption.text) {
+        captions.push(tempCaption);
+      }
+      tempCaption = {};
+    }
   }
-  return results;
+
+  return captions;
 };
 
-// Converts timestamp to seconds
+// Converts timestamp to seconds (now correctly handles milliseconds)
 const timeToSeconds = (time) => {
-  const [h, m, s] = time.split(":");
-  return parseFloat(h) * 3600 + parseFloat(m) * 60 + parseFloat(s);
+  const parts = time.split(":");
+  if (parts.length === 3) {
+    const [h, m, s] = parts;
+    return parseInt(h, 10) * 3600 + parseInt(m, 10) * 60 + parseFloat(s);
+  } else if (parts.length === 2) {
+    const [m, s] = parts;
+    return parseInt(m, 10) * 60 + parseFloat(s);
+  }
+  return 0;
 };
 
 export default CustomSubtitles;

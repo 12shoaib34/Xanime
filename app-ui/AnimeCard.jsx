@@ -16,7 +16,7 @@ const AnimeCard = (props) => {
       onClick={handleClick}
       className="border-primary cursor-pointer rounded-xl overflow-hidden border-2 flex flex-col justify-between hover:-translate-y-2 duration-300"
     >
-      <Image className="object-cover w-full" src={data.image} alt={data.image} width={256} height={253} />
+      <Image priority className="object-cover w-full" src={data.image} alt={data.image} width={256} height={253} />
       <div className="p-4">
         <h2 className="text-lg font-semibold mb-2 line-clamp-2">{data.anime}</h2>
         <p className="text-sm text-gray-500 line-clamp-3">{data.description}</p>

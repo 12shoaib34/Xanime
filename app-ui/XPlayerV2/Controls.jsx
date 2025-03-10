@@ -40,10 +40,10 @@ const Controls = (props) => {
 
     if (!document.fullscreenElement) {
       XPlayer.requestFullscreen();
-      setSettings((prev) => ({ ...prev, isFullscreen: true }));
+      setSettings((prev) => ({ ...prev, fullscreen: true }));
     } else {
       document.exitFullscreen();
-      setSettings((prev) => ({ ...prev, isFullscreen: false }));
+      setSettings((prev) => ({ ...prev, fullscreen: false }));
     }
   };
 
@@ -197,7 +197,7 @@ const Controls = (props) => {
         <XButton onClick={onRewind}>{<MdReplay10 size={22} />}</XButton>
         <XButton onClick={onForward}>{<MdForward10 size={22} />}</XButton>
         <XButton onClick={toggleFullscreen}>
-          {settings?.isFullscreen ? <MdFullscreenExit size={22} /> : <MdFullscreen size={22} />}
+          {settings?.fullscreen ? <MdFullscreenExit size={22} /> : <MdFullscreen size={22} />}
         </XButton>
       </div>
     </div>

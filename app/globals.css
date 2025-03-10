@@ -1,23 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400;700&display=swap");
 @import "tailwindcss";
 
 :root {
   /* background */
-  --background: #ffffff;
-  --background-secondary: #1c1c1c;
+  --background: #181c14;
+  --background-secondary: #212121;
   --background-tertiary: #2d2d2d;
 
   /* foreground */
-  --foreground: #202020;
+  --foreground: #aeaeae;
   --foreground-secondary: #1c1c1c;
   --foreground-tertiary: #2d2d2d;
 
-  --border: #e5e5e5;
-  --primary: #5a2e98;
-
+  --border: #424242;
+  --primary: #d59f3a;
 }
 
 @theme inline {
-  
   /* background */
   --color-background: var(--background);
   --color-background-secondary: var(--background-secondary);
@@ -32,23 +31,16 @@
   --font-mono: var(--font-geist-mono);
   --color-primary: var(--primary);
   --color-border-primary: var(--border);
-
-  
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0f0f0f;
-    --foreground: #ededed;
-    --border: #333333;
-   
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  cursor: pointer;
 }
 
 .border-primary {
@@ -58,8 +50,8 @@ body {
 .x-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .flex-center {
@@ -68,10 +60,24 @@ body {
   align-items: center;
 }
 
-
-video::cue {
-  transform: translateY(-100px); /* Moves up */
-  font-size: 22px;
-  color: white;
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
+.caption-font {
+  font-family: "PT Sans Caption", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  font-size: 26px;
+}
+
+/* buttons */
+
+.btn-primary {
+  @apply text-primary border-primary bg-background-secondary font-semibold rounded-lg capitalize px-6 py-1;
+}

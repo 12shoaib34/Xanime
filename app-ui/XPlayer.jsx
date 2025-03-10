@@ -2,7 +2,16 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
-import { MdPlayArrow, MdPause, MdVolumeOff, MdVolumeUp, MdFullscreen, MdReplay10, MdForward10, MdFullscreenExit } from "react-icons/md";
+import {
+  MdPlayArrow,
+  MdPause,
+  MdVolumeOff,
+  MdVolumeUp,
+  MdFullscreen,
+  MdReplay10,
+  MdForward10,
+  MdFullscreenExit,
+} from "react-icons/md";
 import { AiOutlineLoading } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 
@@ -117,8 +126,6 @@ const XPlayer = ({ videoUrl, tracks = [], nextEpisode, animeId }) => {
   const toggleFullscreen = () => {
     const videoContainer = document.getElementById("_x-player");
 
-    console.log(videoContainer);
-
     if (videoContainer) {
       if (document.fullscreenElement) {
         document.exitFullscreen();
@@ -226,7 +233,6 @@ const XPlayer = ({ videoUrl, tracks = [], nextEpisode, animeId }) => {
   };
 
   const onDuration = (duration) => {
-    console.log(duration);
     setDuration(duration);
   };
 
@@ -289,9 +295,15 @@ const XPlayer = ({ videoUrl, tracks = [], nextEpisode, animeId }) => {
                 <span className="block min-w-[200%] w-[200%] h-[200%] bg-primary/30 rounded-full opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-100 duration-200"></span>
               </span>
               {/* buffer */}
-              <span style={{ width: `${progress.loaded * 100}%` }} className="bg-white/50 absolute top-0 left-0 h-full" />
+              <span
+                style={{ width: `${progress.loaded * 100}%` }}
+                className="bg-white/50 absolute top-0 left-0 h-full"
+              />
               {/* progress */}
-              <span style={{ width: `${progress.played * 100}%` }} className="bg-primary absolute top-0 left-0 h-full" />
+              <span
+                style={{ width: `${progress.played * 100}%` }}
+                className="bg-primary absolute top-0 left-0 h-full"
+              />
             </div>
           </div>
 
@@ -327,7 +339,10 @@ const Button = (props) => {
   const { onClick = () => {}, children } = props;
 
   return (
-    <button onClick={onClick} className="cursor-pointer h-12 w-12 min-w-12 text-3xl text-white hover:bg-black/50 duration-100 rounded-full flex items-center justify-center">
+    <button
+      onClick={onClick}
+      className="cursor-pointer h-12 w-12 min-w-12 text-3xl text-white hover:bg-black/50 duration-100 rounded-full flex items-center justify-center"
+    >
       {children}
     </button>
   );

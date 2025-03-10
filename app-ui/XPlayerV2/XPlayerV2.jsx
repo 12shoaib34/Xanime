@@ -8,17 +8,22 @@ import Hls from "hls.js";
 import Controls from "./Controls";
 import CustomSubtitles from "./CustomSubtitles";
 
-const XPlayerV2 = ({ url, captions }) => {
+const XPlayerV2 = ({ url, captions, onComplete }) => {
   const playerRef = useRef(null);
   const hlsRef = useRef(null);
+  const containerRef = useRef(null);
+  const timeoutRef = useRef(null);
 
   const [isBuffering, setIsBuffering] = useState(false);
   const [duration, setDuration] = useState(0);
   const [progress, setProgress] = useState({});
+  const [isInactive, setIsInactive] = useState(false);
+
   const [settings, setSettings] = useState({
     isMuted: false,
     isPlaying: true,
-    volume: 0.5,
+    fullscreen: false,
+    volume: 100,
     playbackRate: 1,
     selectedQuality: -1,
     caption: captions?.[0] || {},
@@ -30,8 +35,6 @@ const XPlayerV2 = ({ url, captions }) => {
     if (Hls.isSupported() && url) {
       const hls = new Hls();
       hls.loadSource(url);
-      hls.attachMedia(playerRef.current.getInternalPlayer());
-
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
         const levels = hls.levels.map((level, index) => ({
           index,
@@ -49,8 +52,41 @@ const XPlayerV2 = ({ url, captions }) => {
     }
   }, [url]);
 
+  useEffect(() => {
+    if (!settings?.fullscreen) return;
+
+    const resetTimer = () => {
+      setIsInactive(false);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => setIsInactive(true), 5000);
+    };
+
+    const handleUserActivity = () => {
+      resetTimer();
+    };
+
+    if (containerRef.current) {
+      containerRef.current.addEventListener("mousemove", handleUserActivity);
+      containerRef.current.addEventListener("keydown", handleUserActivity);
+    }
+
+    resetTimer();
+
+    return () => {
+      if (containerRef.current) {
+        containerRef.current.removeEventListener("mousemove", handleUserActivity);
+        containerRef.current.removeEventListener("keydown", handleUserActivity);
+      }
+      clearTimeout(timeoutRef.current);
+    };
+  }, [settings?.fullscreen]);
+
   return (
-    <div id="XPlayer" className="w-full h-full relative">
+    <div
+      id="XPlayer"
+      ref={containerRef}
+      className={`w-full h-full relative bg-background-secondary group ${isInactive ? "cursor-none" : "cursor-auto"}`}
+    >
       <div className="w-full h-full relative">
         <VideoAreaActions
           progress={progress}
@@ -68,6 +104,7 @@ const XPlayerV2 = ({ url, captions }) => {
           playbackRate={settings.playbackRate}
           onDuration={setDuration}
           onProgress={setProgress}
+          onEnded={onComplete}
           onBuffer={() => setIsBuffering(true)}
           onBufferEnd={() => setIsBuffering(false)}
           controls={false}
@@ -76,15 +113,19 @@ const XPlayerV2 = ({ url, captions }) => {
           config={{
             file: {
               forceHLS: true,
-              attributes: { crossOrigin: "anonymous" },
             },
           }}
           playsinline
         />
-        <CustomSubtitles subtitleUrl={settings.caption?.file || captions?.[0]?.file || ""} playerRef={playerRef} />
+        {playerRef.current && (
+          <CustomSubtitles subtitleUrl={settings.caption?.file || captions?.[0]?.file || ""} playerRef={playerRef} />
+        )}
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 px-4 cursor-pointer z-20 bg-gradient-to-t from-gray-900 to-white/0">
+      <div
+        className={`absolute bottom-0 left-0 right-0 px-4 cursor-pointer z-20 bg-gradient-to-t from-black to-white/0 
+        transition-opacity duration-300 ${isInactive ? "opacity-0" : "opacity-100"}`}
+      >
         <SeekBar playerRef={playerRef} progress={progress} />
         <Controls
           duration={duration}

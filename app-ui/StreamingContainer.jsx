@@ -16,14 +16,16 @@ const StreamingContainer = (props) => {
   }, [cat, episode]);
 
   const fetchEpisode = async (episode, cat) => {
+    if (!episode) return;
+
     try {
       setLoading(true);
-      const url = `https://animesource.me/watch${anime.slug.replace("EPISODE", episode)}.json?cat=${cat}`;
+      let url = `https://animesource.me/watch${anime.slug.replace("{{ep}}", episode)}.json?cat=${cat}`;
+
       const { data } = await axios.get(url);
       if (data?.success) {
         setAnimeData(data?.data);
       } else {
-        console.log("");
       }
     } catch (error) {
       console.log(error);
@@ -34,26 +36,92 @@ const StreamingContainer = (props) => {
 
   const sourceUrl = animeData?.sources?.[0]?.url;
   const tracks = animeData?.tracks;
-
   const captions = tracks?.filter((item) => item?.kind === "captions");
+
+  const onNext = () => {
+    window.location.href = `/anime?id=${anime._id}&ep=${episode + 1}&cat=${cat || ""}`;
+  };
+
+  const onPrev = () => {
+    window.location.href = `/anime?id=${anime._id}&ep=${episode - 1}&cat=${cat || ""}`;
+  };
+
+  const onCatChange = (cat) => {
+    window.location.href = `/anime?id=${anime._id}&ep=${episode}&cat=${cat || ""}`;
+  };
+
+  if (!episode) {
+    return (
+      <Container>
+        <div className="flex-center flex-col h-full w-full gap-2">
+          <p>Please select an episode</p>
+        </div>
+      </Container>
+    );
+  }
 
   if (loading) {
     return (
-      <div className="h-full w-full bg-background-secondary flex-center">
-        <AiOutlineLoading3Quarters className="animate-spin" size={100} />
-      </div>
+      <Container>
+        <div className="flex-center h-full w-full">
+          <AiOutlineLoading3Quarters className="animate-spin" size={100} />
+        </div>
+      </Container>
     );
   }
 
   if (!sourceUrl && !loading) {
     return (
-      <div className="h-full w-full bg-background-secondary flex-center">
-        <p>Source not found</p>
-      </div>
+      <Container>
+        <div className="flex-center flex-col h-full w-full gap-2">
+          <p>Source not found</p>
+          <button className="btn-primary" onClick={() => window.location.reload()}>
+            Reload Page
+          </button>
+        </div>
+      </Container>
     );
   }
 
-  return <XPlayerV2 url={sourceUrl} captions={captions} />;
+  return (
+    <div className="flex-1">
+      <div className="pb-[66%] relative">
+        <div className="absolute top-0 left-0 right-0 bottom-0">
+          <XPlayerV2 url={sourceUrl} captions={captions} onComplete={onNext} />
+        </div>
+      </div>
+      {!loading && (
+        <div className="flex items-center justify-between mt-4">
+          <div className="flex items-center gap-2">
+            <button onClick={onPrev} className="btn-primary">
+              Prev
+            </button>
+            <button onClick={onNext} className="btn-primary">
+              Next
+            </button>
+          </div>
+          <div className="flex items-center gap-2">
+            {anime?.cat?.map((item) => (
+              <button onClick={() => onCatChange(item)} className="btn-primary" key={item}>
+                {item}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default StreamingContainer;
+
+const Container = (props) => {
+  const { children } = props;
+  return (
+    <div className="flex-1 bg-background-secondary rounded-lg">
+      <div className="pb-[66%] relative">
+        <div className="absolute top-0 left-0 right-0 bottom-0">{children}</div>
+      </div>
+    </div>
+  );
+};
