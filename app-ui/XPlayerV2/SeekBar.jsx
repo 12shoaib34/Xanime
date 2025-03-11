@@ -120,6 +120,8 @@ const SeekBar = ({ progress, playerRef, trackThumbnails = [] }) => {
       aria-live="polite"
       onKeyDown={handleKeyDown}
       onMouseMove={handleMouseMove}
+      onTouchMove={handleMouseMove}
+      onTouchEnd={() => setThumbnail(null)}
       onMouseLeave={() => setThumbnail(null)}
       aria-busy={handleDragging}
       onMouseDown={onSeekStart}

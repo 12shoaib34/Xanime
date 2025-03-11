@@ -75,16 +75,16 @@ const VideoAreaActions = (props) => {
       <button
         onClick={(event) => bindFn(event, togglePlayPause)}
         onDoubleClick={(event) => bindFn(event, onRewind)}
-        className="col-span-2 h-full"
+        className="col-span-2 h-full outline-none"
       ></button>
       <button
         onDoubleClick={(event) => bindFn(event, toggleFullscreen)}
         onClick={(event) => bindFn(event, togglePlayPause)}
-        className="col-span-4 h-full flex-center"
+        className="col-span-4 h-full flex-center outline-none"
       >
         <MdPlayCircle
           size={100}
-          className={`duration-300 text-white ${settings.isPlaying ? "opacity-0" : "opacity-100"}`}
+          className={`duration-300 text-white outline-none ${settings.isPlaying ? "opacity-0" : "opacity-100"}`}
         />
       </button>
       <button
