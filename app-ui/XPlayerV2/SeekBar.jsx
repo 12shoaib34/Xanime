@@ -127,7 +127,7 @@ const SeekBar = ({ progress, playerRef, trackThumbnails = [] }) => {
       onMouseDown={onSeekStart}
       onTouchStart={onSeekStart}
       ref={seekBarRef}
-      className="flex items-center relative h-1 bg-black/50 cursor-pointer mb-2 outlined-3-primary hover:h-3 hover:transform hover:translate-y-1 duration-100"
+      className="flex items-center relative h-2 bg-black/50 cursor-pointer mb-2 outlined-3-primary hover:h-3 hover:transform hover:translate-y-1 duration-100"
     >
       <div
         role="presentation"
@@ -148,7 +148,7 @@ const SeekBar = ({ progress, playerRef, trackThumbnails = [] }) => {
           className="absolute -translate-x-1/2 rounded-md overflow-hidden scale-110 duration-75 origin-bottom w-36 h-36 bg-no-repeat"
           style={{
             left: `${hoverPosition.x}px`,
-            bottom: `14px`,
+            bottom: `12px`,
             backgroundImage: `url(${trackThumbnails?.[0]?.file?.replace("/thumbnails.vtt", "/")}/${
               thumbnail.imageUrl
             })`,

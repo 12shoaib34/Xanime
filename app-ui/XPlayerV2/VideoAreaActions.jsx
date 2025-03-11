@@ -90,7 +90,7 @@ const VideoAreaActions = (props) => {
       <button
         onClick={(event) => bindFn(event, togglePlayPause)}
         onDoubleClick={(event) => bindFn(event, onForward)}
-        className="col-span-2 h-full"
+        className="col-span-2 h-full outline-none"
       ></button>
     </div>
   );
