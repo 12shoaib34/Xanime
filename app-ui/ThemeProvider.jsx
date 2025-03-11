@@ -29,16 +29,18 @@ const ThemeProvider = () => {
         setTimeout(() => {
           setLoading(false);
           document.body.style.overflow = "auto"; // Re-enable scrolling
-        }, 1000); // Wait for transition
-      }, 100);
+        }, 2000); // Wait for transition
+      }, 1000);
     }
   }, []);
 
   return loading ? (
     <div
       id="loader"
-      className="fixed z-50 w-full h-full bg-background top-0 left-0 transition-opacity duration-1000 opacity-100"
-    ></div>
+      className="fixed z-50 w-full h-full bg-black top-0 left-0 transition-opacity duration-1000 opacity-100"
+    >
+      <div className="loader"></div>{" "}
+    </div>
   ) : null;
 };
 
