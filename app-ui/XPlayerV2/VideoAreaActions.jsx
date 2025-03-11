@@ -50,6 +50,8 @@ const VideoAreaActions = (props) => {
       toggleFullscreen();
     } else if (e.code === "KeyM") {
       setSettings((prev) => ({ ...prev, isMuted: !prev.isMuted }));
+    } else if (e.code === "KeyR") {
+      window.location.reload();
     }
   };
 
@@ -84,7 +86,7 @@ const VideoAreaActions = (props) => {
       >
         <MdPlayCircle
           size={100}
-          className={`duration-300 text-white outline-none ${settings.isPlaying ? "opacity-0" : "opacity-100"}`}
+          className={`duration-300 text-white ${settings.isPlaying ? "opacity-0" : "opacity-100"}`}
         />
       </button>
       <button
