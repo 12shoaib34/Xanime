@@ -2,7 +2,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { MdPlayCircle } from "react-icons/md";
 
 const VideoAreaActions = (props) => {
-  const { playerRef, progress = {}, settings = {}, isBuffering = false, setSettings } = props;
+  const { playerRef, progress = {}, settings = {}, isBuffering = false, setSettings, onComplete = () => {} } = props;
 
   const onForward = () => {
     if (playerRef.current) {
@@ -52,6 +52,8 @@ const VideoAreaActions = (props) => {
       setSettings((prev) => ({ ...prev, isMuted: !prev.isMuted }));
     } else if (e.code === "KeyR") {
       window.location.reload();
+    } else if (e.code === "KeyN") {
+      onComplete();
     }
   };
 

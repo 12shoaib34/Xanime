@@ -94,6 +94,7 @@ const XPlayerV2 = ({ url, captions = [], trackThumbnails = [], onComplete }) => 
           settings={settings}
           playerRef={playerRef}
           setSettings={setSettings}
+          onComplete={onComplete}
         />
         <ReactPlayer
           ref={playerRef}
