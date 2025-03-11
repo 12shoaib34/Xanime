@@ -113,21 +113,44 @@ const Controls = (props) => {
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center">
-        <span className="block mr-2 text-xs leading-none">
+        <XButton className="relative" onClick={togglePlay}>
+          <MdPause
+            size={26}
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 duration-300 -translate-y-1/2 ${
+              settings.isPlaying ? "opacity-100" : "opacity-0"
+            }`}
+          />
+          <MdPlayArrow
+            size={26}
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 duration-300 -translate-y-1/2 ${
+              !settings.isPlaying ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        </XButton>
+        <XButton className="relative" onClick={toggleMute}>
+          <MdVolumeOff
+            size={26}
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 duration-300 -translate-y-1/2 ${
+              settings.isMuted ? "opacity-100" : "opacity-0"
+            }`}
+          />
+
+          <MdVolumeUp
+            size={26}
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 duration-300 -translate-y-1/2 ${
+              !settings.isMuted ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        </XButton>
+        <span className="block ml-2 text-xs leading-none">
           {formateTime(progress.playedSeconds)} / {formateTime(duration)}
         </span>
-        <XButton onClick={togglePlay}>
-          {settings?.isPlaying ? <MdPause size={22} /> : <MdPlayArrow size={22} />}
-        </XButton>
-        <XButton onClick={toggleMute}>
-          {settings?.isMuted ? <MdVolumeOff size={22} /> : <MdVolumeUp size={22} />}
-        </XButton>
       </div>
 
       <div className="flex items-center">
         <div className="relative">
-          <XButton onClick={toggleSettingOpen}>
-            <MdSettings size={22} />
+          <XButton className="group" onClick={toggleSettingOpen}>
+            <MdSettings className="group-focus:rotate-90 duration-300" size={26} />
           </XButton>
           <div
             className={`min-w-[300px] min-h-[300px] absolute -translate-y-full -translate-x-full top-0 left-10 p-2 bg-background-secondary rounded-2xl ${
@@ -194,10 +217,18 @@ const Controls = (props) => {
             )}
           </div>
         </div>
-        <XButton onClick={onRewind}>{<MdReplay10 size={22} />}</XButton>
-        <XButton onClick={onForward}>{<MdForward10 size={22} />}</XButton>
-        <XButton onClick={toggleFullscreen}>
-          {settings?.fullscreen ? <MdFullscreenExit size={22} /> : <MdFullscreen size={22} />}
+        <XButton className="group" onClick={onRewind}>
+          {<MdReplay10 size={26} className="group-focus:-rotate-45 duration-300" />}
+        </XButton>
+        <XButton className="group" onClick={onForward}>
+          {<MdForward10 size={26} className="group-focus:rotate-45 duration-300" />}
+        </XButton>
+        <XButton className="group" onClick={toggleFullscreen}>
+          {settings?.fullscreen ? (
+            <MdFullscreenExit className="group-focus:scale-150 duration-300" size={26} />
+          ) : (
+            <MdFullscreen size={26} className="group-focus:scale-150 duration-300" />
+          )}
         </XButton>
       </div>
     </div>

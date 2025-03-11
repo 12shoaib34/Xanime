@@ -37,6 +37,7 @@ const StreamingContainer = (props) => {
   const sourceUrl = animeData?.sources?.[0]?.url;
   const tracks = animeData?.tracks;
   const captions = tracks?.filter((item) => item?.kind === "captions");
+  const trackThumbnails = tracks?.filter((item) => item?.kind === "thumbnails");
 
   const onNext = () => {
     window.location.href = `/anime?id=${anime._id}&ep=${episode + 1}&cat=${cat || ""}`;
@@ -75,7 +76,7 @@ const StreamingContainer = (props) => {
       <Container>
         <div className="flex-center flex-col h-full w-full gap-2">
           <p>Source not found</p>
-          <button className="btn-primary" onClick={() => window.location.reload()}>
+          <button className="btn btn-primary btn-xs" onClick={() => window.location.reload()}>
             Reload Page
           </button>
         </div>
@@ -87,22 +88,22 @@ const StreamingContainer = (props) => {
     <div className="flex-1">
       <div className="pb-[66%] relative">
         <div className="absolute top-0 left-0 right-0 bottom-0">
-          <XPlayerV2 url={sourceUrl} captions={captions} onComplete={onNext} />
+          <XPlayerV2 url={sourceUrl} captions={captions} trackThumbnails={trackThumbnails} onComplete={onNext} />
         </div>
       </div>
       {!loading && (
         <div className="flex items-center justify-between mt-4">
           <div className="flex items-center gap-2">
-            <button onClick={onPrev} className="btn-primary">
+            <button onClick={onPrev} className="btn btn-secondary btn-xs">
               Prev
             </button>
-            <button onClick={onNext} className="btn-primary">
+            <button onClick={onNext} className="btn btn-secondary btn-xs">
               Next
             </button>
           </div>
           <div className="flex items-center gap-2">
             {anime?.cat?.map((item) => (
-              <button onClick={() => onCatChange(item)} className="btn-primary" key={item}>
+              <button onClick={() => onCatChange(item)} className="btn btn-secondary btn-xs" key={item}>
                 {item}
               </button>
             ))}

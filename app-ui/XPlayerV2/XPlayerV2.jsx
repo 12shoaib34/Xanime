@@ -8,7 +8,7 @@ import Hls from "hls.js";
 import Controls from "./Controls";
 import CustomSubtitles from "./CustomSubtitles";
 
-const XPlayerV2 = ({ url, captions, onComplete }) => {
+const XPlayerV2 = ({ url, captions = [], trackThumbnails = [], onComplete }) => {
   const playerRef = useRef(null);
   const hlsRef = useRef(null);
   const containerRef = useRef(null);
@@ -126,7 +126,7 @@ const XPlayerV2 = ({ url, captions, onComplete }) => {
         className={`absolute bottom-0 left-0 right-0 px-4 cursor-pointer z-20 bg-gradient-to-t from-black to-white/0 
         transition-opacity duration-300 ${isInactive ? "opacity-0" : "opacity-100"}`}
       >
-        <SeekBar playerRef={playerRef} progress={progress} />
+        <SeekBar trackThumbnails={trackThumbnails} playerRef={playerRef} progress={progress} />
         <Controls
           duration={duration}
           setSettings={setSettings}

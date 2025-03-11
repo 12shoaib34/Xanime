@@ -90,6 +90,17 @@ button {
   @apply bg-primary text-white hover:opacity-75 active:opacity-100;
 }
 
+.btn.btn-secondary {
+  @apply bg-background-secondary text-white hover:opacity-75 active:opacity-100;
+}
+
+.btn.btn-xs {
+  @apply px-2 py-1 md:px-3 md:py-2 text-xs;
+}
 .btn.btn-md {
   @apply px-4 py-2 md:px-6 md:py-4 text-base;
+}
+
+.outlined-3-primary {
+  @apply focus:outline-3 focus:outline-offset-2 focus:outline-double focus:outline-primary/50;
 }
