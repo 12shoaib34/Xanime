@@ -12,7 +12,6 @@
   --foreground-secondary: #1c1c1c;
   --foreground-tertiary: #2d2d2d;
 
-  --border: #424242;
   --primary: #e53637;
 }
 
@@ -41,10 +40,6 @@ body {
 
 button {
   cursor: pointer;
-}
-
-.border-primary {
-  border-color: var(--border);
 }
 
 .font-oswald {
