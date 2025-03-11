@@ -3,8 +3,8 @@
 
 :root {
   /* background */
-  --background: #0b0c2a;
-  --background-secondary: #070720;
+  --background: #212121;
+  --background-secondary: #171717;
   --background-tertiary: #2d2d2d;
 
   /* foreground */
@@ -13,6 +13,7 @@
   --foreground-tertiary: #2d2d2d;
 
   --primary: #e53637;
+  --font-color-primary: #ffffff;
 }
 
 @theme inline {
@@ -25,6 +26,7 @@
   --color-foreground: var(--foreground);
   --color-foreground-secondary: var(--foreground-secondary);
   --color-foreground-tertiary: var(--foreground-tertiary);
+  --color-font-color-primary: var(--font-color-primary);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -78,7 +80,7 @@ button {
 /* buttons */
 
 .btn {
-  @apply cursor-pointer block font-semibold uppercase w-max;
+  @apply cursor-pointer block font-semibold uppercase;
 }
 
 .btn.btn-primary {

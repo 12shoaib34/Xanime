@@ -12,8 +12,6 @@ const VideoAreaActions = (props) => {
 
   const togglePlayPause = () => {
     setSettings((prev) => ({ ...prev, isPlaying: !prev.isPlaying }));
-
-    console.log("togglePlayPause");
   };
 
   const onRewind = () => {

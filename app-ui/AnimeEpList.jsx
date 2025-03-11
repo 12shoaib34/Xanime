@@ -1,12 +1,20 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import Select from "./Select";
 
 const AnimeEpList = ({ data, selectedEpisode }) => {
   const total = data?.totalEpisodes || 0;
   const episodes = Array.from({ length: total }, (_, index) => index + 1);
+
+  const [progress, setProgress] = useState([]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const progress = JSON.parse(localStorage.getItem("progress")) || [];
+      setProgress(progress);
+    }
+  }, []);
 
   const episodeGroups = episodes.reduce((acc, episode) => {
     const groupIndex = Math.floor((episode - 1) / 100);
@@ -32,10 +40,26 @@ const AnimeEpList = ({ data, selectedEpisode }) => {
     setSelectedIndex(getSelectedGroupIndex);
   }, [selectedEpisode]);
 
+  console.log(progress, "progress");
+
   const handleEpisodeClick = (episode) => {
     const cat = data?.cat?.includes("dub") ? "dub" : "sub";
-    window.location.href = `/anime?id=${data._id}&ep=${episode}&cat=${cat}`;
+    const url = `/anime?id=${data._id}&ep=${episode}&cat=${cat}`;
+
+    let currentAnime = progress?.find((anime) => anime._id === data._id) || {};
+    if (currentAnime?._id) {
+      currentAnime.continueUrl = url;
+    } else {
+      currentAnime = { _id: data._id, continueUrl: url };
+    }
+
+    const updateProgress = [...progress.filter((anime) => anime._id !== data._id), currentAnime];
+    localStorage.setItem("progress", JSON.stringify(updateProgress));
+
+    window.location.href = url;
   };
+
+  const progressUrl = progress?.find((anime) => anime._id === data._id)?.continueUrl;
 
   const onSelect = (e) => {
     setSelectedIndex(e.index);
@@ -51,6 +75,14 @@ const AnimeEpList = ({ data, selectedEpisode }) => {
           valuePropName="index"
           selectedValue={selectedIndex}
         />
+      </div>
+
+      <div className="mb-4">
+        {progressUrl && !progressUrl?.includes(`${selectedEpisode}`) && (
+          <button onClick={() => (window.location.href = progressUrl)} className="btn btn-primary btn-xs w-full">
+            Continue
+          </button>
+        )}
       </div>
 
       <div className="flex-1 overflow-y-auto hide-scrollbar">

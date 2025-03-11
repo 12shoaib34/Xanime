@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import XButton from "./XButton";
 import moment from "moment";
 import {
@@ -20,8 +22,8 @@ import { TbClockCog } from "react-icons/tb";
 const Controls = (props) => {
   const { playerRef, settings, setSettings, progress, qualityLevels = [], captions = [], duration } = props;
 
-  const [currentTab, setCurrentTab] = React.useState("SUBTITLES");
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [currentTab, setCurrentTab] = useState("QUALITY");
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleSettingOpen = () => {
     setIsOpen(!isOpen);

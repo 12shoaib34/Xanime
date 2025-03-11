@@ -106,8 +106,6 @@ const SeekBar = ({ progress, playerRef, trackThumbnails = [] }) => {
     setHoverPosition({ x: e.clientX - rect.left, y: rect.top });
   };
 
-  console.log(thumbnail);
-
   return (
     <div
       role="slider"
