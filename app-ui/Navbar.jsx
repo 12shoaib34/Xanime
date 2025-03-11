@@ -25,17 +25,17 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <a className="p-5 block" href="./categories.html">
+                <a className="p-5 block text-font-color-secondary" href="./categories.html">
                   Categories
                 </a>
               </li>
               <li>
-                <a className="p-5 block" href="./blog.html">
+                <a className="p-5 block text-font-color-secondary" href="./blog.html">
                   Our Blog
                 </a>
               </li>
               <li>
-                <a className="p-5 block" href="#">
+                <a className="p-5 block text-font-color-secondary" href="#">
                   Contacts
                 </a>
               </li>

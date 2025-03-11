@@ -14,7 +14,7 @@ export default async function Home(props) {
             <div className="p-5 md:pt-56 md:px-12 md:pb-8">
               <div className="relative z-10 max-w-lg">
                 <div className="bg-white text-primary text-sm px-2 py-1 w-max">Adventure</div>
-                <h2 className="font-oswald font-semibold mt-4 md:mt-8 mb-2 text-2xl md:text-4xl md:leading-12">
+                <h2 className="font-oswald text-white font-semibold mt-4 md:mt-8 mb-2 text-2xl md:text-4xl md:leading-12">
                   Fate / Stay Night: Unlimited Blade Works
                 </h2>
                 <p className="mb-4 md:mb-8">After 30 days of travel across the world...</p>

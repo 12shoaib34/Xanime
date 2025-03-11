@@ -125,13 +125,13 @@ const SeekBar = ({ progress, playerRef, trackThumbnails = [] }) => {
       onMouseDown={onSeekStart}
       onTouchStart={onSeekStart}
       ref={seekBarRef}
-      className="flex items-center relative h-2 bg-black/50 cursor-pointer mb-2 outlined-3-primary hover:h-3 hover:transform hover:translate-y-1 duration-100"
+      className="flex items-center relative h-2 bg-white/50 cursor-pointer mb-2 outlined-3-primary hover:h-3 hover:transform hover:translate-y-1 duration-100"
     >
       <div
         role="presentation"
         aria-hidden
         style={{ width: `${progress.loaded * 100}%` }}
-        className="block h-full bg-white/50 absolute top-0 left-0"
+        className="block h-full bg-primary/40 absolute top-0 left-0"
       ></div>
       <div
         ref={seekProgressRef}

@@ -144,7 +144,7 @@ const Controls = (props) => {
             }`}
           />
         </XButton>
-        <span className="block ml-2 text-xs leading-none">
+        <span className="block text-white ml-2 text-xs leading-none">
           {formateTime(progress.playedSeconds)} / {formateTime(duration)}
         </span>
       </div>
@@ -155,7 +155,7 @@ const Controls = (props) => {
             <MdSettings className="group-focus:rotate-90 duration-300" size={26} />
           </XButton>
           <div
-            className={`min-w-[300px] min-h-[300px] absolute -translate-y-full -translate-x-full top-0 left-10 p-2 bg-background-secondary rounded-2xl ${
+            className={`min-w-[300px] min-h-[250px] absolute -translate-y-full -translate-x-full top-0 left-10 p-2 bg-background-secondary rounded-2xl ${
               isOpen ? "block" : "hidden"
             }`}
           >
@@ -171,12 +171,12 @@ const Controls = (props) => {
               </XButton>
             </div>
             {currentTab === "SUBTITLES" && captions?.length > 0 && (
-              <div className="flex flex-col">
+              <div className="flex flex-col max-h-[250px] overflow-auto hide-scrollbar">
                 {captions.map((caption, index) => (
                   <button
                     onClick={() => onCaptionChange(caption)}
-                    className={`cursor-pointer text-left hover:bg-slate-800 py-2 px-4 rounded-2xl ${
-                      settings.caption.label === caption.label ? "bg-slate-800" : ""
+                    className={`cursor-pointer text-left hover:bg-background-tertiary py-2 px-4 rounded-2xl ${
+                      settings.caption.label === caption.label ? "bg-background-tertiary" : ""
                     }`}
                     key={index}
                   >
@@ -187,12 +187,12 @@ const Controls = (props) => {
               </div>
             )}
             {currentTab === "QUALITY" && qualityLevels?.length > 0 && (
-              <div className="flex flex-col">
+              <div className="flex flex-col max-h-[250px] overflow-auto hide-scrollbar">
                 {qualityLevels.map((quality, index) => (
                   <button
                     onClick={() => onQualityUpdate(quality)}
-                    className={`cursor-pointer text-left hover:bg-slate-800 py-2 px-4 rounded-2xl ${
-                      settings.selectedQuality === quality.index ? "bg-slate-800" : ""
+                    className={`cursor-pointer text-left hover:bg-background-tertiary py-2 px-4 rounded-2xl ${
+                      settings.selectedQuality === quality.index ? "bg-background-tertiary" : ""
                     }`}
                     key={index}
                   >
@@ -203,12 +203,12 @@ const Controls = (props) => {
               </div>
             )}
             {currentTab === "PLAYBACK_SPEED" && (
-              <div className="flex flex-col">
-                {[0.5, 1, 1.5, 2].map((speed, index) => (
+              <div className="flex flex-col max-h-[250px] overflow-auto hide-scrollbar">
+                {[0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2].map((speed, index) => (
                   <button
                     onClick={() => onPlayBackRateChange(speed)}
-                    className={`cursor-pointer text-left hover:bg-slate-800 py-2 px-4 rounded-2xl ${
-                      settings.playbackRate === speed ? "bg-slate-800" : ""
+                    className={`cursor-pointer text-left hover:bg-background-tertiary py-2 px-4 rounded-2xl ${
+                      settings.playbackRate === speed ? "bg-background-tertiary" : ""
                     }`}
                     key={index}
                   >

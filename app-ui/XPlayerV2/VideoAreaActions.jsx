@@ -1,5 +1,5 @@
 import { AiOutlineLoading } from "react-icons/ai";
-import { MdPlayCircle } from "react-icons/md";
+import { PiPlayBold } from "react-icons/pi";
 
 const VideoAreaActions = (props) => {
   const { playerRef, progress = {}, settings = {}, isBuffering = false, setSettings, onComplete = () => {} } = props;
@@ -84,9 +84,11 @@ const VideoAreaActions = (props) => {
         onClick={(event) => bindFn(event, togglePlayPause)}
         className="col-span-4 h-full flex-center outline-none"
       >
-        <MdPlayCircle
-          size={100}
-          className={`duration-300 text-white ${settings.isPlaying ? "opacity-0" : "opacity-100"}`}
+        <PiPlayBold
+          size={90}
+          className={`duration-300 bg-primary/30 p-2 backdrop-blur-xs rounded-full text-white ${
+            settings.isPlaying ? "opacity-0" : "opacity-100"
+          }`}
         />
       </button>
       <button

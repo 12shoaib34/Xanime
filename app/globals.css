@@ -14,6 +14,7 @@
 
   --primary: #e53637;
   --font-color-primary: #ffffff;
+  --font-color-secondary: #1c1c1c;
 }
 
 @theme inline {
@@ -27,6 +28,7 @@
   --color-foreground-secondary: var(--foreground-secondary);
   --color-foreground-tertiary: var(--foreground-tertiary);
   --color-font-color-primary: var(--font-color-primary);
+  --color-font-color-secondary: var(--font-color-secondary);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -84,11 +86,11 @@ button {
 }
 
 .btn.btn-primary {
-  @apply bg-primary text-white hover:opacity-75 active:opacity-100;
+  @apply bg-primary text-font-color-primary hover:opacity-75 active:opacity-100;
 }
 
 .btn.btn-secondary {
-  @apply bg-background-secondary text-white hover:opacity-75 active:opacity-100;
+  @apply bg-background-secondary text-font-color-secondary hover:opacity-75 active:opacity-100;
 }
 
 .btn.btn-xs {

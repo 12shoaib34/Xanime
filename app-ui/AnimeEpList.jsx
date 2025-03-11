@@ -92,7 +92,9 @@ const AnimeEpList = ({ data, selectedEpisode }) => {
               <button
                 onClick={() => handleEpisodeClick(ep)}
                 className={`w-full h-10 text-xs md:text-base rounded-md  ${
-                  selectedEpisode === ep ? "bg-primary text-black" : "bg-background-secondary text-gray-400"
+                  selectedEpisode === ep
+                    ? "bg-primary text-font-color-primary"
+                    : "bg-background-secondary text-font-color-secondary"
                 } ${data?.filers?.includes(ep) ? "line-through opacity-20" : ""}`}
               >
                 {ep}

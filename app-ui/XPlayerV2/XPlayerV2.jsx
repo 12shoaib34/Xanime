@@ -124,7 +124,7 @@ const XPlayerV2 = ({ url, captions = [], trackThumbnails = [], onComplete }) => 
       </div>
 
       <div
-        className={`absolute bottom-0 left-0 right-0 px-4 cursor-pointer z-20 bg-gradient-to-t from-black to-white/0 
+        className={`absolute bottom-0 left-0 right-0 px-4 pb-4 cursor-pointer z-20 bg-gradient-to-t from-black to-white/0 
         transition-opacity duration-300 ${isInactive ? "opacity-0" : "opacity-100"}`}
       >
         <SeekBar trackThumbnails={trackThumbnails} playerRef={playerRef} progress={progress} />

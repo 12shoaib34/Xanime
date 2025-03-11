@@ -9,10 +9,14 @@ const ThemeProvider = () => {
     const loader = document.getElementById("loader");
     document.body.style.overflow = "hidden"; // Disable scrolling initially
 
-    // LocalStorage se color retrieve karke apply karna
-    const savedColor = localStorage.getItem("primaryColor");
-    if (savedColor) {
-      document.documentElement.style.setProperty("--primary", savedColor);
+    // LocalStorage se theme retrieve karke apply karna
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      const theme = JSON.parse(savedTheme);
+      Object.keys(theme).forEach((key) => {
+        const cssVarName = `--${key.replace(/([A-Z])/g, "-$1").toLowerCase()}`;
+        document.documentElement.style.setProperty(cssVarName, theme[key]);
+      });
     }
 
     if (loader) {
