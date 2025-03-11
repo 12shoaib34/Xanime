@@ -86,7 +86,7 @@ const StreamingContainer = (props) => {
 
   return (
     <div className="flex-1">
-      <div className="pb-[66%] relative">
+      <div className="pb-[56.5%] relative">
         <div className="absolute top-0 left-0 right-0 bottom-0">
           <XPlayerV2 url={sourceUrl} captions={captions} trackThumbnails={trackThumbnails} onComplete={onNext} />
         </div>
