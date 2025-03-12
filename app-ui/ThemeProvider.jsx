@@ -6,31 +6,33 @@ const ThemeProvider = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loader = document.getElementById("loader");
-    document.body.style.overflow = "hidden"; // Disable scrolling initially
+    if (typeof window !== "undefined") {
+      const loader = document.getElementById("loader");
+      document.body.style.overflow = "hidden"; // Disable scrolling initially
 
-    // LocalStorage se theme retrieve karke apply karna
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      const theme = JSON.parse(savedTheme);
-      Object.keys(theme).forEach((key) => {
-        const cssVarName = `--${key.replace(/([A-Z])/g, "-$1").toLowerCase()}`;
-        document.documentElement.style.setProperty(cssVarName, theme[key]);
-      });
-    }
+      // LocalStorage se theme retrieve karke apply karna
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        const theme = JSON.parse(savedTheme);
+        Object.keys(theme).forEach((key) => {
+          const cssVarName = `--${key.replace(/([A-Z])/g, "-$1").toLowerCase()}`;
+          document.documentElement.style.setProperty(cssVarName, theme[key]);
+        });
+      }
 
-    if (loader) {
-      loader.classList.add("opacity-100");
-
-      setTimeout(() => {
-        loader.classList.remove("opacity-100");
-        loader.classList.add("opacity-0");
+      if (loader) {
+        loader.classList.add("opacity-100");
 
         setTimeout(() => {
-          setLoading(false);
-          document.body.style.overflow = "auto"; // Re-enable scrolling
-        }, 2000); // Wait for transition
-      }, 1000);
+          loader.classList.remove("opacity-100");
+          loader.classList.add("opacity-0");
+
+          setTimeout(() => {
+            setLoading(false);
+            document.body.style.overflow = "auto"; // Re-enable scrolling
+          }, 2000); // Wait for transition
+        }, 1000);
+      }
     }
   }, []);
 

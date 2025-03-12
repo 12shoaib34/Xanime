@@ -13,7 +13,7 @@ const AnimeCard = (props) => {
   };
 
   return (
-    <div onClick={handleClick} className="">
+    <div onClick={handleClick} className="cursor-pointer hover:scale-105 duration-300">
       <div className="rounded-md overflow-hidden relative mb-6 max-h-[325px]">
         <Image priority className="object-cover w-full" src={data.image} alt={data.image} width={230} height={325} />
         <div className="pt-6 pb-4 px-4 bg-gradient-to-t from-black/70 to-white/0 absolute bottom-0 left-0 w-full">
