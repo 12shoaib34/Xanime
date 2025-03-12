@@ -10,6 +10,14 @@ const StreamingContainer = (props) => {
 
   const [loading, setLoading] = useState(true);
   const [animeData, setAnimeData] = useState(null);
+  const [progress, setProgress] = useState([]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const progress = JSON.parse(localStorage.getItem("progress")) || [];
+      setProgress(progress);
+    }
+  }, []);
 
   useEffect(() => {
     fetchEpisode(episode, cat);
@@ -39,8 +47,25 @@ const StreamingContainer = (props) => {
   const captions = tracks?.filter((item) => item?.kind === "captions");
   const trackThumbnails = tracks?.filter((item) => item?.kind === "thumbnails");
 
+  const handleEpisodeClick = (episode) => {
+    const cat = anime?.cat?.includes("dub") ? "dub" : "sub";
+    const url = `/anime?id=${anime._id}&ep=${episode}&cat=${cat}`;
+
+    let currentAnime = progress?.find((a) => anime._id === a._id) || {};
+    if (currentAnime?._id) {
+      currentAnime.continueUrl = url;
+    } else {
+      currentAnime = { _id: anime._id, continueUrl: url };
+    }
+
+    const updateProgress = [...progress.filter((a) => anime._id !== a._id), currentAnime];
+    localStorage.setItem("progress", JSON.stringify(updateProgress));
+
+    window.location.href = url;
+  };
+
   const onNext = () => {
-    window.location.href = `/anime?id=${anime._id}&ep=${episode + 1}&cat=${cat || ""}`;
+    handleEpisodeClick(episode + 1);
   };
 
   const onPrev = () => {
