@@ -40,8 +40,6 @@ const AnimeEpList = ({ data, selectedEpisode }) => {
     setSelectedIndex(getSelectedGroupIndex);
   }, [selectedEpisode]);
 
-  console.log(progress, "progress");
-
   const handleEpisodeClick = (episode) => {
     const cat = data?.cat?.includes("dub") ? "dub" : "sub";
     const url = `/anime?id=${data._id}&ep=${episode}&cat=${cat}`;

@@ -43,7 +43,9 @@ const ThemeProvider = () => {
     >
       <div className="loader"></div>{" "}
     </div>
-  ) : null;
+  ) : (
+    <></>
+  );
 };
 
 export default ThemeProvider;
